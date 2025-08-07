@@ -24,4 +24,4 @@ weather-pipeline/
 ├── scripts/              # Python scripts for API calls and processing
 ├── logs/                 # Airflow logs
 ├── .env                  # Environment variables (API keys, configs)
-└── README.md             # Project overview
+└── README.md             # Project overview 
