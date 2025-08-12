@@ -1,8 +1,8 @@
 from airflow import DAG
-from airflow.providers.https.hooks.http import HttpHook #for requesting data from an API 
+from airflow.providers.http.hooks.http import HttpHook #for requesting data from an API 
 from airflow.providers.postgres.hooks.postgres import PostgresHook #for writing data to a PostgreSQL database
 from airflow.decorators import task  #for defining tasks in the DAG
-from airflow.utils.dates import days_ago  #for setting the start date of the DAG
+import pendulum  #for handling dates and times
 import requests
 import json
 
@@ -15,13 +15,13 @@ api_conn_id = "open_meteo_api"  #connection ID for the weather API
 
 default_args = {
     "owner": "airflow", #owner of the DAG
-    "start_date": days_ago(1) #start date for the DAG
+    "start_date": pendulum.datetime(2025, 8, 11) #start date for the DAG
     }  #default arguments for the DAG
 
 with DAG(
     dag_id="etl_weather",
     default_args=default_args,
-    schedule_interval="@daily",
+    schedule="@daily",
     catchup=False, #do not run past dates
 ) as dags:
 
